@@ -18,15 +18,10 @@
 */
 import Dashboard from "views/Dashboard.js";
 import Notifications from "views/Notifications.js";
-import Icons from "views/Icons.js";
-import Typography from "views/Typography.js";
-import TableList from "views/Tables.js";
-import Maps from "views/Map.js";
 import UserPage from "views/User.js";
-import UpgradeToPro from "views/Upgrade.js";
 import ListAlumniEvents from "./components/AlumniEvents/ListAlumniEvents";
 
-var routes = [
+const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -43,7 +38,7 @@ var routes = [
   },
   {
     path: "/notifications",
-    name: "Users",
+    name: "Alumni",
     icon: "fa fa-users",
     component: Notifications,
     layout: "/admin",
@@ -56,4 +51,6 @@ var routes = [
     layout: "/admin",
   },
 ];
+
+
 export default routes;

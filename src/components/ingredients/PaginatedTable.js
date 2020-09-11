@@ -6,7 +6,12 @@ import {Pagination} from "react-laravel-paginex";
 
 import './PaginatedTable.css';
 
-const PaginatedTable = ({columns, endpoint}) => {
+const PaginatedTable = ({
+                            columns,
+                            endpoint,
+                            tableClassName,
+                            ...props
+                        }) => {
 
     const [data, setData] = useState({
         page: 1,
@@ -49,8 +54,8 @@ const PaginatedTable = ({columns, endpoint}) => {
 
     return (
 
-        <div>
-            <Table {...getTableProps()}>
+        <div {...props}>
+            <Table {...getTableProps()} className={tableClassName}>
                 <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>

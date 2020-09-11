@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -13,6 +13,7 @@ import {
 
 const UpsertAlumniEvent = (props) => {
 
+    const id = props.match.params.id || null;
 
     const [formFields, setFormFields] = useState({
         name: '',
@@ -21,6 +22,26 @@ const UpsertAlumniEvent = (props) => {
         start_date: undefined,
         end_date: undefined,
     });
+
+    useEffect(() => {
+        if (id) {
+            axios.get(`/webapi/alumni/events/${id}`)
+                .then(({data}) => {
+                    const {status, alumni_event} = data;
+
+                    if (status === 'success' && !_.isEmpty(alumni_event)) {
+                        setFormFields(alumni_event);
+                    } else {
+                        setRedirectTo('/events')
+                    }
+
+                }).catch(() => {
+                toast.error("Invalid URL passed");
+                setRedirectTo('/events')
+            })
+        }
+
+    }, [id]);
 
     const [errors, setErrors] = useState([]);
     const [redirectTo, setRedirectTo] = useState(null);
@@ -45,7 +66,7 @@ const UpsertAlumniEvent = (props) => {
     };
 
     if (redirectTo) {
-        return <Redirect to={redirectTo} />
+        return <Redirect to={redirectTo}/>
     }
 
     return (
@@ -53,11 +74,20 @@ const UpsertAlumniEvent = (props) => {
         <>
             <div className="content">
 
+                <Row className='mb-3'>
+                    <Col>
+                        <NavLink to={'/events'}>
+                            <i className='fa fa-arrow-left'/> Back to list
+                        </NavLink>
+                    </Col>
+                </Row>
+
+                
                 <Row>
                     <Col md="9">
                         <Card className="card-user">
                             <CardHeader>
-                                <CardTitle tag="h5">Create New Event</CardTitle>
+                                <CardTitle tag="h5">{id ? 'Update' : 'Create'} Event</CardTitle>
                             </CardHeader>
 
                             <CardBody>

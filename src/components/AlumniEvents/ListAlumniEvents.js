@@ -21,6 +21,10 @@ const ListAlumniEvents = (props) => {
                 accessor: 'name',
             },
             {
+                Header: 'Location',
+                accessor: 'location',
+            },
+            {
                 Header: 'Description',
                 accessor: 'description',
             },
@@ -40,12 +44,24 @@ const ListAlumniEvents = (props) => {
                 Header: 'Actions',
                 accessor: '',
                 Cell: ({row}) => {
-                    console.log(row);
-                 return (
-                     <span>
-                    {row.original.id} todo: edit
-                    </span>
-                 )
+                    return (
+                        <span>
+                            <NavLink
+                                to={`/events/details/${row.original.id}`}
+                                className='mx-2'
+                                activeClassName="active"
+                            >
+                                <i className={'fa fa-eye'}/>
+                            </NavLink>
+                            <NavLink
+                                to={`/events/upsert/${row.original.id}`}
+                                activeClassName="active"
+                            >
+                                <i className={'fa fa-edit'}/>
+                            </NavLink>
+
+                        </span>
+                    )
 
                 }
             },
@@ -74,7 +90,10 @@ const ListAlumniEvents = (props) => {
                                 </CardTitle>
                             </CardHeader>
                             <CardBody>
-                                <PaginatedTable columns={columns} endpoint={'webapi/alumni/events'}/>
+                                <PaginatedTable
+                                    columns={columns}
+                                    endpoint={'webapi/alumni/events'}
+                                />
                             </CardBody>
                         </Card>
                     </Col>

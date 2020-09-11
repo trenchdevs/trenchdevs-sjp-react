@@ -16,7 +16,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {
     Card, CardHeader, CardBody, CardFooter,
     CardTitle, Row, Col, Button,

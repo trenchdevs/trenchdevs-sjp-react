@@ -21,7 +21,7 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import {Route, Switch} from "react-router-dom";
 
-import { ToastContainer } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
@@ -30,6 +30,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
 import UpsertAlumniEvent from "../components/AlumniEvents/UpsertAlumniEvent";
+import EventDetails from "../components/AlumniEvents/EventDetails";
 
 var ps;
 
@@ -107,12 +108,9 @@ class Dashboard extends React.Component {
                                     />
                                 );
                             })}
-                            <Route
-                                exact
-                                path={'/events/upsert'}
-                                component={UpsertAlumniEvent}
-                                key={6}
-                            />
+                            <Route exact path={'/events/upsert'} component={UpsertAlumniEvent}/>
+                            <Route path={'/events/upsert/:id'} component={UpsertAlumniEvent}/>
+                            <Route path={'/events/details/:id'} component={EventDetails}/>
                         </>
                     </Switch>
                     <Footer fluid/>
